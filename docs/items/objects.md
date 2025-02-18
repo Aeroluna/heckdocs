@@ -103,4 +103,4 @@ If you wish to create **fake notes** (notes that do not show up in the note coun
 ### Notes
 
 * `#!json "spawnEffect": bool` Set to false and the note spawn effect will be hidden. True and the note spawn effect will spawn regardless of player setting.
-* `#!json "disableNoteDebris": bool` When true, cutting the note spawns will not debris.
+* `#!json "disableDebris": bool` When true, cutting the note spawns will not debris.
