@@ -112,11 +112,11 @@ Any GameObject assigned a track will automatically be assigned a `TransformContr
 ### Material
 
 * `#!json "color": [r, g, b, a]` (floats)
-* `#!json "shader": "Standard"/"OpaqueLight"/"TransparentLight"` What shader to use. OpaqueLight and TransparentLight will create a TubeBloomPrePassLightWithId and TubeBloomPrePassLight and can be controlled by standard lighting events. TransparentLight will be invisible when the light is turned off.
+* `#!json "shader": "Standard"/"OpaqueLight"/"TransparentLight"/"Glowing"/"BaseWater"/"BTSPillar"/"BillieWater"/"WaterfallMirror"/"InterscopeConcrete"/"InterscopeCar"` What shader to use. OpaqueLight and TransparentLight will create a TubeBloomPrePassLightWithId and TubeBloomPrePassLight and can be controlled by standard lighting events. TransparentLight will be invisible when the light is turned off.
 * `#!json "track": string` Assign the material to a track, allowing you to animate the `color`.
 * `#!json "shaderKeywords": string[]` By default, each shader has its default keywords. This allows overwriting the keywords of the shader.
 !!! danger
-    The Standard shader has changed in BS v1.38, setting it to empty shaderKeywords no longer makes it appear full bright. Chroma will automatically add `["MULTIPLY_REFLECTIONS", "FOG", "DIFFUSE", "REFLECTION_PROBE_BOX_PROJECTION"]` when using an empty array to attempt to keep the Standard shader visible on old maps.
+    The Standard/BTSPillar shader has changed in BS v1.38, setting it to empty shaderKeywords no longer makes it appear full bright. Chroma will automatically change these to Glowing and set the color alpha to 0 when using an empty array to attempt to replicate the previous behavior on old maps.
 ![Keyword difference](../assets/environment/shaderKeyword.png)
 
 !!! tip
