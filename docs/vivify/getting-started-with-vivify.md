@@ -97,6 +97,11 @@ See [Single-pass instanced rendering and custom shaders](https://docs.unity3d.co
 
     If necesssary, the bloom effect can be disabled using [SetCameraProperty](events.md#setcameraproperty), though this is not recommended because the will break other shaders that may rely on this effect, such as notes, walls, sabers, lighting, and ui.
 
+!!! tip
+    When using billboard particles, it's advised to disable the "Allow Roll" option under the Renderer section of a particle system.
+
+    ![Allow Roll under Particle System/Renderer](../assets/vivify/psallowroll.png)
+
 ### Multipass
 
 On versions past 1.29.1, players may use AssetBundleLoadingTools to instead use **Multipass** instead of Single Pass Instanced to keep compatibility with outdated shaders.
