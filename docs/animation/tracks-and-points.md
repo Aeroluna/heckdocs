@@ -319,7 +319,7 @@ The true value of modifiers are useful when using **base properties** which allo
 
 #### Bases
 
-Base properties represent a set amount of values and are continously updated.
+Base properties represent a set amount of values and are continuously updated.
 
 Bases will only evaluate when their value is grabbed.
 
@@ -347,60 +347,70 @@ Bases will only evaluate when their value is grabbed.
 
 Player Transform
 
-- `baseHeadPosition`: [x, y, z]
-- `baseHeadLocalPosition`: [x, y, z]
-- `baseHeadRotation`: [x, y, z]
-- `baseHeadLocalRotation`: [x, y, z]
-- `baseHeadLocalScale`: [x, y, z]
-- `baseLeftHandPosition`: [x, y, z]
-- `baseLeftHandLocalPosition`: [x, y, z]
-- `baseLeftHandRotation`: [x, y, z]
-- `baseLeftHandLocalRotation`: [x, y, z]
-- `baseLeftHandLocalScale`: [x, y, z]
-- `baseRightHandPosition`: [x, y, z]
-- `baseRightHandLocalPosition`: [x, y, z]
-- `baseRightHandRotation`: [x, y, z]
-- `baseRightHandLocalRotation`: [x, y, z]
-- `baseRightHandLocalScale`: [x, y, z]
+- `#!json "baseHeadPosition"`: [x, y, z] HMD position
+- `#!json "baseHeadLocalPosition"`: [x, y, z] HMD local position
+- `#!json "baseHeadRotation"`: [x, y, z] HMD rotation
+- `#!json "baseHeadLocalRotation"`: [x, y, z] HMD local rotation
+- `#!json "baseHeadLocalScale"`: [x, y, z] HMD local scale
+- `#!json "baseLeftHandPosition"`: [x, y, z] Left saber position
+- `#!json "baseLeftHandLocalPosition"`: [x, y, z] Left saber local position
+- `#!json "baseLeftHandRotation"`: [x, y, z] Left saber rotation
+- `#!json "baseLeftHandLocalRotation"`: [x, y, z] Left saber local rotation
+- `#!json "baseLeftHandLocalScale"`: [x, y, z] Left saber local scale
+- `#!json "baseRightHandPosition"`: [x, y, z] Right saber position
+- `#!json "baseRightHandLocalPosition"`: [x, y, z] Right saber local position
+- `#!json "baseRightHandRotation"`: [x, y, z] Right saber rotation
+- `#!json "baseRightHandLocalRotation"`: [x, y, z] Right saber local rotation
+- `#!json "baseRightHandLocalScale"`: [x, y, z] Right saber local scale
 
 Color
 
-- `baseNote0Color`: [x, y, z, w]
-- `baseNote1Color`: [x, y, z, w]
-- `baseObstaclesColor`: [x, y, z, w]
-- `baseSaberAColor`: [x, y, z, w]
-- `baseSaberBColor`: [x, y, z, w]
-- `baseEnvironmentColor0`: [x, y, z, w]
-- `baseEnvironmentColor1`: [x, y, z, w]
-- `baseEnvironmentColorW`: [x, y, z, w]
-- `baseEnvironmentColor0Boost`: [x, y, z, w]
-- `baseEnvironmentColor1Boost`: [x, y, z, w]
-- `baseEnvironmentColorWBoost`: [x, y, z, w]
+- `#!json "baseNote0Color"`: [x, y, z, w] Left/Red note color
+- `#!json "baseNote1Color"`: [x, y, z, w] Right/Blue note color
+- `#!json "baseObstaclesColor"`: [x, y, z, w] Wall color
+- `#!json "baseSaberAColor"`: [x, y, z, w] Left/Red saber color
+- `#!json "baseSaberBColor"`: [x, y, z, w] Right/Blue saber color
+- `#!json "baseEnvironmentColor0"`: [x, y, z, w] Left/Red laser color
+- `#!json "baseEnvironmentColor1"`: [x, y, z, w] Right/Blue laser color
+- `#!json "baseEnvironmentColorW"`: [x, y, z, w] White laser color
+- `#!json "baseEnvironmentColor0Boost"`: [x, y, z, w] Left/Red laser boost color
+- `#!json "baseEnvironmentColor1Boost"`: [x, y, z, w] Right/Blue laser boost color
+- `#!json "baseEnvironmentColorWBoost"`: [x, y, z, w] White laser boost color
 
 Scoring
 
-- `baseCombo`: [x]
-- `baseMultipliedScore`: [x]
-- `baseImmediateMaxPossibleMultipliedScore`: [x]
-- `baseModifiedScore`: [x]
-- `baseImmediateMaxPossibleModifiedScore`: [x]
-- `baseRelativeScore`: [x]
-- `baseMultiplier`: [x]
-- `baseEnergy`: [x]
-- `baseSongTime`: [x]
-- `baseSongLength`: [x]
+- `#!json "baseCombo"`: [x] Player's combo
+- `#!json "baseMultipliedScore"`: [x] Player's score. This value is unlimited and *not* normalized from 0 - 1
+- `#!json "baseImmediateMaxPossibleMultipliedScore"`: [x] Max possible score if all notes were hit perfectly up to the current time
+- `#!json "baseModifiedScore"`: [x] Player's score multiplied by the gameplay modifier's score multipliers
+- `#!json "baseImmediateMaxPossibleModifiedScore"`: [x] Immediate max possible score, multiplied by the gameplay modifier's score multipliers
+- `#!json "baseRelativeScore"`: [x] Player's score percentage (0 - 1). Equivalent to `baseMultipliedScore / baseImmediateMaxPossibleMultipliedScore`, but properly handles division by 0
+- `#!json "baseMultiplier"`: [x] Player's multiplier (1, 2, 4, 8)
+- `#!json "baseEnergy"`: [x] Player's energy (0 - 1)
+- `#!json "baseSongTime"`: [x] Current time in the map in seconds
+- `#!json "baseSongLength"`: [x] Total length of the map in seconds
 
 !!! tip
     You can get the current normalized song time by doing `["baseSongTime", [ "baseSongLength", "opDiv"]]`
 
-#### Parts
+#### Swizzling
+
+Swizzling is a technique commonly seen in graphics programming. It is used the same way here to arrange components of a property into a new vector to be used in any animation.
 
 You can pick and choose individual components of bases to use by using `.xyzw`. For example, if you only wanted the `z` component of the head position, you can use `baseHeadPosition.z`, or if you wanted the `xy` components, you can use `baseHeadPosition.xy`. These values can be unordered and reused, e.g. `baseHeadPosition.zzx`.
+!!! example
+    `#!json "baseHeadLocalPosition"` = `[0, 1, 2]`
 
-Picking individual components of bases also allows using high dimension points in lower dimensional properties.
+    `#!json "baseHeadLocalPosition.zyx"` = `[2, 1, 0]`
+
+    `baseHeadLocalPosition.zyx` references the `zyx` components of `baseHeadLocalPosition`, mirroring the X and Z values
+
+Swizzling individual components of bases also allows changing the dimensions of a property.
 !!! example
     `baseHeadPosition` is three dimensional, and `dissolve` is one dimensional, but by using `.x`, we get a *one* dimensional point.
     ```json
+    // Where "baseHeadPosition" = [6.23, 2.45, 6.34]
+    // "dissolve": [6.23]
     {
       "b": 5,
       "t": "AnimateTrack",
@@ -413,18 +423,20 @@ Picking individual components of bases also allows using high dimension points i
     ```
     It is also possible to *increase* a base's dimension.
     ```json
+    // Where "baseSongTime" = [10.3012]
+    // "position": [10.3012, 10.3012, 10.3012]
     {
       "b": 5,
       "t": "AnimateTrack",
       "d": {
         "track": "tutorialnote0",
         "duration": 999,
-        "offsetPosition": ["baseCombo.xxx"]
+        "offsetPosition": ["baseSongTime.xxx"]
       }
     }
     ```
 
-Additionally these parts can be mixed and matched together to make complex points.
+Additionally, components can be mixed and matched together to make complex points.
 !!! example
     ```json
     {
@@ -440,7 +452,9 @@ Additionally these parts can be mixed and matched together to make complex point
 
 #### Smooth
 
-Bases can be smoothed between frames by using the `.s[number]` syntax. Lower values will be smoother than higher values, i.e. `baseEnergy.s4` will be smoother than `baseEnergy.s20`. Additionally decimal numbers can be represented by replacing the period with an underscore, i.e. for a smoothness value of 0.4, use `.s0_4`.
+Bases can be smoothed between frames by using the `.s[number]` syntax. Smoothing is helpful for many cases if you are tracking any player property such as the head or sabers. Smoothing out their transform can make effects look cleaner.
+
+ Lower values will be smoother than higher values, i.e. `baseEnergy.s4` will be smoother than `baseEnergy.s20`. Additionally decimal numbers can be represented by replacing the period with an underscore, i.e. for a smoothness value of 0.4, use `.s0_4`.
 !!! example
     Smoothly track the HMD. Used to achieve the HUD effect in [End Times](https://beatsaver.com/maps/43a24) and [Through the Screen](https://beatsaver.com/maps/43a5d).
     ```json
@@ -457,4 +471,4 @@ Bases can be smoothed between frames by using the `.s[number]` syntax. Lower val
     ```
 
 !!! tip
-    Both parts and smoothing can be used in conjunction with each other, e.g. `baseHeadPosition.xzy.s2`.
+    Both swizzling and smoothing can be used in conjunction with each other, e.g. `baseHeadPosition.xzy.s2`.
