@@ -19,7 +19,7 @@ Environments are modified by a list of "commands" in the `"environment"` array. 
     * `#!json "localPosition": [x, y, z]` (floats) Sets localPosition of GameObject.
     * `#!json "rotation": [x, y, z]` (floats) Sets rotation of GameObject.
     * `#!json "localRotation": [x, y, z]` (floats) Sets localRotation of GameObject.
-    * `#!json "track": string` Adds the object to a track, allowing you to animate it. See [TransformController](#transformcontroller)
+    * `#!json "track": string/string[]` Adds the object to a track, allowing you to animate it. See [TransformController](#transformcontroller)
     * `#!json "components": object`: See below.
 
 All of the custom data is stored in the difficulty's json.
